@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
-using System.Threading.Tasks;
 using AcrInsight.Models;
 using Reactive.Bindings;
 
@@ -38,6 +38,12 @@ namespace AcrInsight.ViewModels
         /// Gets container repository names.
         /// </summary>
         public ObservableCollection<string> RepositoryNames { get; } = new ObservableCollection<string>();
+
+
+        /// <summary>
+        /// Gets selected repository name.
+        /// </summary>
+        public ReactiveProperty<string> SelectedRepositoryName { get; } = new ReactiveProperty<string>(mode: ReactivePropertyMode.DistinctUntilChanged);
         #endregion
 
 
@@ -72,6 +78,11 @@ namespace AcrInsight.ViewModels
                 this.RepositoryNames.Clear();
                 foreach (var x in loaded)
                     this.RepositoryNames.Add(x.Name);
+            });
+
+            this.SelectedRepositoryName.Subscribe(x =>
+            {
+                System.Windows.MessageBox.Show(x);
             });
         }
         #endregion
