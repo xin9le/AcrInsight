@@ -7,4 +7,10 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="Microsoft.Azure.ContainerRegistry">
+      <HintPath>Libraries\Microsoft.Azure.ContainerRegistry.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
