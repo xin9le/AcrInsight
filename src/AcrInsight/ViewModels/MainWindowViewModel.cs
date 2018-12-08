@@ -1,4 +1,7 @@
-﻿using System.Reactive.Linq;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 using AcrInsight.Models;
 using Reactive.Bindings;
@@ -16,21 +19,29 @@ namespace AcrInsight.ViewModels
         /// <summary>
         /// Gets ACR user name.
         /// </summary>
-        public ReactiveProperty<string> UserName { get; }
+        public ReactiveProperty<string> UserName { get; } = new ReactiveProperty<string>();
 
 
         /// <summary>
         /// Gets ACR password.
         /// </summary>
-        public ReactiveProperty<string> Password { get; }
+        public ReactiveProperty<string> Password { get; } = new ReactiveProperty<string>();
 
 
         /// <summary>
         /// Gets ACR login server.
         /// </summary>
-        public ReactiveProperty<string> LoginServer { get; }
+        public ReactiveProperty<string> LoginServer { get; } = new ReactiveProperty<string>();
 
 
+        /// <summary>
+        /// Gets container repository names.
+        /// </summary>
+        public ObservableCollection<string> RepositoryNames { get; } = new ObservableCollection<string>();
+        #endregion
+
+
+        #region Commands
         /// <summary>
         /// Gets load command.
         /// </summary>
@@ -44,10 +55,7 @@ namespace AcrInsight.ViewModels
         /// </summary>
         public MainWindowViewModel()
         {
-            //--- initialize properties
-            this.UserName = new ReactiveProperty<string>();
-            this.Password = new ReactiveProperty<string>();
-            this.LoginServer = new ReactiveProperty<string>();
+            //--- initialize
             this.LoadCommand
                 = this.UserName.CombineLatest
                 (
@@ -57,10 +65,13 @@ namespace AcrInsight.ViewModels
                 )
                 .ToAsyncReactiveCommand();
 
-            //--- command
+            //--- operations
             this.LoadCommand.Subscribe(async () =>
             {
-                var repos = await AcrRepository.LoadAsync(this.UserName.Value, this.Password.Value, this.LoginServer.Value);
+                var loaded = await AcrRepository.LoadAsync(this.UserName.Value, this.Password.Value, this.LoginServer.Value);
+                this.RepositoryNames.Clear();
+                foreach (var x in loaded)
+                    this.RepositoryNames.Add(x.Name);
             });
         }
         #endregion

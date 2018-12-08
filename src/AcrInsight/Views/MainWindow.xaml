@@ -34,7 +34,13 @@
                 </StackPanel>
             </GroupBox>
 
-            <ListView Grid.Row="1" Margin="0,5,0,0"></ListView>
+            <ListView Grid.Row="1" Margin="0,5,0,0" ItemsSource="{Binding RepositoryNames}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Repository Name" DisplayMemberBinding="{Binding}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
         <ListView Grid.Column="1" Margin="0,5,5,5"></ListView>
     </Grid>
