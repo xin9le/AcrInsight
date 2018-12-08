@@ -1,5 +1,6 @@
 ﻿using System.Reactive.Linq;
 using System.Threading.Tasks;
+using AcrInsight.Models;
 using Reactive.Bindings;
 
 
@@ -31,9 +32,9 @@ namespace AcrInsight.ViewModels
 
 
         /// <summary>
-        /// Gets login command.
+        /// Gets load command.
         /// </summary>
-        public AsyncReactiveCommand LoginCommand { get; }
+        public AsyncReactiveCommand LoadCommand { get; }
         #endregion
 
 
@@ -47,7 +48,7 @@ namespace AcrInsight.ViewModels
             this.UserName = new ReactiveProperty<string>();
             this.Password = new ReactiveProperty<string>();
             this.LoginServer = new ReactiveProperty<string>();
-            this.LoginCommand
+            this.LoadCommand
                 = this.UserName.CombineLatest
                 (
                     this.Password,
@@ -57,9 +58,9 @@ namespace AcrInsight.ViewModels
                 .ToAsyncReactiveCommand();
 
             //--- command
-            this.LoginCommand.Subscribe(async () =>
+            this.LoadCommand.Subscribe(async () =>
             {
-                await Task.Delay(500);
+                var repos = await AcrRepository.LoadAsync(this.UserName.Value, this.Password.Value, this.LoginServer.Value);
             });
         }
         #endregion

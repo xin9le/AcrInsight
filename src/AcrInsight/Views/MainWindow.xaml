@@ -30,7 +30,7 @@
                     <TextBox Text="{Binding Password.Value, UpdateSourceTrigger=PropertyChanged}" />
                     <TextBlock Text="Login Server :" Margin="0,5,0,0" />
                     <TextBox Text="{Binding LoginServer.Value, UpdateSourceTrigger=PropertyChanged}" />
-                    <Button Content="Login" Margin="0,7,0,0" Command="{Binding LoginCommand}" />
+                    <Button Content="Login" Margin="0,7,0,0" Command="{Binding LoadCommand}" />
                 </StackPanel>
             </GroupBox>
 
