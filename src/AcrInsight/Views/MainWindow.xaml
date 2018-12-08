@@ -5,8 +5,37 @@
         xmlns:vm="clr-namespace:AcrInsight.ViewModels"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="AcrInsight" Height="500" Width="500">
+        Title="Azure Container Registry Insight" Height="500" Width="500">
     <Window.DataContext>
         <vm:MainWindowViewModel />
     </Window.DataContext>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Margin="5,0,5,5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+            <GroupBox Header="Account" Padding="2">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="User Name :" />
+                    <TextBox Text="{Binding UserName.Value, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Text="Password :" Margin="0,5,0,0" />
+                    <TextBox Text="{Binding Password.Value, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Text="Login Server :" Margin="0,5,0,0" />
+                    <TextBox Text="{Binding LoginServer.Value, UpdateSourceTrigger=PropertyChanged}" />
+                    <Button Content="Login" Margin="0,7,0,0" Command="{Binding LoginCommand}" />
+                </StackPanel>
+            </GroupBox>
+
+            <ListView Grid.Row="1" Margin="0,5,0,0"></ListView>
+        </Grid>
+        <ListView Grid.Column="1" Margin="0,5,5,5"></ListView>
+    </Grid>
 </Window>
