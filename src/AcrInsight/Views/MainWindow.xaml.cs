@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace AcrInsight
+namespace AcrInsight.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
