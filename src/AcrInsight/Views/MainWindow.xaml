@@ -19,6 +19,7 @@
         <Grid Margin="5,0,5,5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             
@@ -30,11 +31,10 @@
                     <TextBox Text="{Binding Password.Value, UpdateSourceTrigger=PropertyChanged}" />
                     <TextBlock Text="Login Server :" Margin="0,5,0,0" />
                     <TextBox Text="{Binding LoginServer.Value, UpdateSourceTrigger=PropertyChanged}" />
-                    <Button Content="Load" Margin="0,7,0,0" Command="{Binding LoadCommand}" />
                 </StackPanel>
             </GroupBox>
-
-            <ListView Grid.Row="1" Margin="0,5,0,0" ItemsSource="{Binding RepositoryNames}">
+            <Button Grid.Row="1" Content="Load" Margin="0,5,0,5" Command="{Binding LoadCommand}" />
+            <ListView Grid.Row="2" ItemsSource="{Binding RepositoryNames}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Repository Name" DisplayMemberBinding="{Binding}"/>
