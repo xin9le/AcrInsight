@@ -52,10 +52,6 @@ namespace AcrInsight.Models
         /// <returns></returns>
         public static async ValueTask<AcrRepository[]> LoadAsync(string userName, string password, string loginServer)
         {
-            if (userName == null) throw new ArgumentNullException(nameof(userName));
-            if (password == null) throw new ArgumentNullException(nameof(password));
-            if (loginServer == null) throw new ArgumentNullException(nameof(loginServer));
-
             //--- create client
             var credentials = new BasicAuthenticationCredentials
             {

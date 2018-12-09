@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 
@@ -18,10 +17,6 @@ namespace AcrInsight.Extensions
         /// <param name="tasks"></param>
         /// <returns></returns>
         public static Task<T[]> WhenAll<T>(this IEnumerable<Task<T>> tasks)
-        {
-            if (tasks == null)
-                throw new ArgumentNullException(nameof(tasks));
-            return Task.WhenAll(tasks);
-        }
+            => Task.WhenAll(tasks);
     }
 }

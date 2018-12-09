@@ -92,7 +92,7 @@ namespace AcrInsight.ViewModels
             this.CopyDigestCommand = this.SelectedManifest.Select(x => x != null).ToReactiveCommand(false);
 
             //--- operations
-            IReadOnlyDictionary<string, AcrManifest[]> repos = null;
+            IReadOnlyDictionary<string, AcrManifest[]> repos = null!;
             this.LoadCommand.Subscribe(async () =>
             {
                 //--- clear
@@ -100,7 +100,7 @@ namespace AcrInsight.ViewModels
                 this.Manifests.Clear();
 
                 //--- load
-                AcrRepository[] loaded = null;
+                AcrRepository[] loaded = null!;
                 try
                 {
                     loaded = await AcrRepository.LoadAsync(this.UserName.Value, this.Password.Value, this.LoginServer.Value);
