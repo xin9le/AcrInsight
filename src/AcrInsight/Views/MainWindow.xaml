@@ -46,7 +46,16 @@
         
         <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center" Background="Transparent" />
         
-        <ListView Grid.Column="2" Margin="0,5,5,5" ItemsSource="{Binding Manifests}">
+        <ListView Grid.Column="2" Margin="0,5,5,5" ItemsSource="{Binding Manifests}" AlternationCount="2">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Style.Triggers>
+                        <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                            <Setter Property="Background" Value="GhostWhite" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Digest" DisplayMemberBinding="{Binding Digest}"/>
