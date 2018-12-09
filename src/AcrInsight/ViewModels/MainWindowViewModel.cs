@@ -95,6 +95,11 @@ namespace AcrInsight.ViewModels
             IReadOnlyDictionary<string, AcrManifest[]> repos = null;
             this.LoadCommand.Subscribe(async () =>
             {
+                //--- clear
+                this.RepositoryNames.Clear();
+                this.Manifests.Clear();
+
+                //--- load
                 AcrRepository[] loaded = null;
                 try
                 {
@@ -109,8 +114,7 @@ namespace AcrInsight.ViewModels
                 }
                 repos = loaded.ToDictionary(x => x.Name, x => x.Manifests);  // cache
 
-                //--- reset repository names
-                this.RepositoryNames.Clear();
+                //--- set repository names
                 foreach (var x in loaded)
                     this.RepositoryNames.Add(x.Name);
             });
@@ -120,6 +124,7 @@ namespace AcrInsight.ViewModels
                 .Subscribe(Clipboard.SetText);
 
             this.SelectedRepositoryName
+                .Where(x => x != null)
                 .Do(_ => this.Manifests.Clear())
                 .Where(_ => repos != null)
                 .Subscribe(x =>
