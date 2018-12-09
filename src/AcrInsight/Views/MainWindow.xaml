@@ -12,11 +12,12 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="200" MinWidth="50" />
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Grid Margin="5,0,5,5">
+        <Grid Margin="5,0,0,5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -42,7 +43,10 @@
                 </ListView.View>
             </ListView>
         </Grid>
-        <ListView Grid.Column="1" Margin="0,5,5,5" ItemsSource="{Binding Manifests}">
+        
+        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center" Background="Transparent" />
+        
+        <ListView Grid.Column="2" Margin="0,5,5,5" ItemsSource="{Binding Manifests}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Digest" DisplayMemberBinding="{Binding Digest}"/>
