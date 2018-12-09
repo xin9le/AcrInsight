@@ -46,7 +46,19 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Digest" DisplayMemberBinding="{Binding Digest}"/>
-                    <GridViewColumn Header="Tags" DisplayMemberBinding="{Binding Tags}"/>
+                    <GridViewColumn Header="Tags">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding Tags}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Vertical"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn Header="OS" DisplayMemberBinding="{Binding OperatingSystem}"/>
                     <GridViewColumn Header="Architecture" DisplayMemberBinding="{Binding Architecture}"/>
                     <GridViewColumn Header="Created Time" DisplayMemberBinding="{Binding CreatedTime, StringFormat={}{0:yyyy/MM/dd HH:mm:ss zzz}}"/>
