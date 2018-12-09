@@ -50,9 +50,16 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <ItemsControl ItemsSource="{Binding Tags}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Margin="1,0" Padding="7,1" BorderThickness="1" BorderBrush="PowderBlue" Background="AliceBlue" CornerRadius="10">
+                                                <TextBlock Text="{Binding}"/>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
-                                            <StackPanel Orientation="Vertical"/>
+                                            <WrapPanel/>
                                         </ItemsPanelTemplate>
                                     </ItemsControl.ItemsPanel>
                                 </ItemsControl>
