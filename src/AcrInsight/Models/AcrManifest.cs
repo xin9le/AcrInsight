@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Microsoft.Azure.ContainerRegistry.Models;
 
@@ -39,13 +40,13 @@ namespace AcrInsight.Models
         /// <summary>
         /// Gets created time.
         /// </summary>
-        public string CreatedTime { get; }
+        public DateTimeOffset CreatedTime { get; }
 
 
         /// <summary>
         /// Gets last update time.
         /// </summary>
-        public string LastUpdateTime { get; }
+        public DateTimeOffset LastUpdateTime { get; }
         #endregion
 
 
@@ -60,8 +61,8 @@ namespace AcrInsight.Models
             this.Tags = new ReadOnlyCollection<string>(source.Tags);
             this.OperatingSystem = source.Os;
             this.Architecture = source.Architecture;
-            this.CreatedTime = source.CreatedTime;
-            this.LastUpdateTime = source.LastUpdateTime;
+            this.CreatedTime = DateTimeOffset.Parse(source.CreatedTime);
+            this.LastUpdateTime = DateTimeOffset.Parse(source.LastUpdateTime);
         }
         #endregion
     }
