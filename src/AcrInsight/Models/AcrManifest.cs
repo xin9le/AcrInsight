@@ -61,8 +61,10 @@ namespace AcrInsight.Models
             this.Tags = new ReadOnlyCollection<string>(source.Tags);
             this.OperatingSystem = source.Os;
             this.Architecture = source.Architecture;
-            this.CreatedTime = DateTimeOffset.Parse(source.CreatedTime);
-            this.LastUpdateTime = DateTimeOffset.Parse(source.LastUpdateTime);
+            var createdTime = DateTimeOffset.Parse(source.CreatedTime);
+            var lastUpdateTime = DateTimeOffset.Parse(source.LastUpdateTime);
+            this.CreatedTime = TimeZoneInfo.ConvertTime(createdTime, TimeZoneInfo.Local);
+            this.LastUpdateTime = TimeZoneInfo.ConvertTime(lastUpdateTime, TimeZoneInfo.Local);
         }
         #endregion
     }
