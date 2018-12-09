@@ -49,8 +49,8 @@
                     <GridViewColumn Header="Tags" DisplayMemberBinding="{Binding Tags}"/>
                     <GridViewColumn Header="OS" DisplayMemberBinding="{Binding OperatingSystem}"/>
                     <GridViewColumn Header="Architecture" DisplayMemberBinding="{Binding Architecture}"/>
-                    <GridViewColumn Header="Created Time" DisplayMemberBinding="{Binding CreatedTime}"/>
-                    <GridViewColumn Header="Last Update Time" DisplayMemberBinding="{Binding LastUpdateTime}"/>
+                    <GridViewColumn Header="Created Time" DisplayMemberBinding="{Binding CreatedTime, StringFormat={}{0:yyyy/MM/dd HH:mm:ss}}"/>
+                    <GridViewColumn Header="Last Update Time" DisplayMemberBinding="{Binding LastUpdateTime, StringFormat={}{0:yyyy/MM/dd HH:mm:ss}}"/>
                 </GridView>
             </ListView.View>
         </ListView>
