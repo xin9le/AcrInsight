@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Windows;
 using AcrInsight.Models;
 using Reactive.Bindings;
 
@@ -81,7 +82,18 @@ namespace AcrInsight.ViewModels
             IReadOnlyDictionary<string, AcrManifest[]> repos = null;
             this.LoadCommand.Subscribe(async () =>
             {
-                var loaded = await AcrRepository.LoadAsync(this.UserName.Value, this.Password.Value, this.LoginServer.Value);
+                AcrRepository[] loaded = null;
+                try
+                {
+                    loaded = await AcrRepository.LoadAsync(this.UserName.Value, this.Password.Value, this.LoginServer.Value);
+                }
+                catch
+                {
+                    var message = "Couldn't load repositories.\nPlease check your account out again.";
+                    var caption = "Repository load failed";
+                    MessageBox.Show(message, caption, MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
                 repos = loaded.ToDictionary(x => x.Name, x => x.Manifests);  // cache
 
                 //--- reset repository names
