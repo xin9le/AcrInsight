@@ -46,7 +46,7 @@
         
         <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center" Background="Transparent" />
         
-        <ListView Grid.Column="2" Margin="0,5,5,5" ItemsSource="{Binding Manifests}" AlternationCount="2">
+        <ListView Grid.Column="2" Margin="0,5,5,5" ItemsSource="{Binding Manifests}" AlternationCount="2" VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Style.Triggers>
@@ -56,6 +56,11 @@
                     </Style.Triggers>
                 </Style>
             </ListView.ItemContainerStyle>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Vertical" CanVerticallyScroll="True" CanHorizontallyScroll="True"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Digest" DisplayMemberBinding="{Binding Digest}"/>
