@@ -5,7 +5,7 @@
         xmlns:vm="clr-namespace:AcrInsight.ViewModels"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Azure Container Registry Insight" Height="500" Width="500">
+        Title="Azure Container Registry Insight" Height="700" Width="1200">
     <Window.DataContext>
         <vm:MainWindowViewModel />
     </Window.DataContext>
