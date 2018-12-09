@@ -44,6 +44,12 @@ namespace AcrInsight.ViewModels
         /// Gets selected repository name.
         /// </summary>
         public ReactiveProperty<string> SelectedRepositoryName { get; } = new ReactiveProperty<string>(mode: ReactivePropertyMode.DistinctUntilChanged);
+
+
+        /// <summary>
+        /// Gets container repository names.
+        /// </summary>
+        public ObservableCollection<AcrManifest> Manifests { get; } = new ObservableCollection<AcrManifest>();
         #endregion
 
 
@@ -72,18 +78,26 @@ namespace AcrInsight.ViewModels
                 .ToAsyncReactiveCommand();
 
             //--- operations
+            IReadOnlyDictionary<string, AcrManifest[]> repos = null;
             this.LoadCommand.Subscribe(async () =>
             {
                 var loaded = await AcrRepository.LoadAsync(this.UserName.Value, this.Password.Value, this.LoginServer.Value);
+                repos = loaded.ToDictionary(x => x.Name, x => x.Manifests);  // cache
+
+                //--- reset repository names
                 this.RepositoryNames.Clear();
                 foreach (var x in loaded)
                     this.RepositoryNames.Add(x.Name);
             });
 
-            this.SelectedRepositoryName.Subscribe(x =>
-            {
-                System.Windows.MessageBox.Show(x);
-            });
+            this.SelectedRepositoryName
+                .Do(_ => this.Manifests.Clear())
+                .Where(_ => repos != null)
+                .Subscribe(x =>
+                {
+                    foreach (var y in repos[x])
+                        this.Manifests.Add(y);
+                });
         }
         #endregion
     }

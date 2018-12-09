@@ -42,6 +42,17 @@
                 </ListView.View>
             </ListView>
         </Grid>
-        <ListView Grid.Column="1" Margin="0,5,5,5"></ListView>
+        <ListView Grid.Column="1" Margin="0,5,5,5" ItemsSource="{Binding Manifests}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Digest" DisplayMemberBinding="{Binding Digest}"/>
+                    <GridViewColumn Header="Tags" DisplayMemberBinding="{Binding Tags}"/>
+                    <GridViewColumn Header="OS" DisplayMemberBinding="{Binding OperatingSystem}"/>
+                    <GridViewColumn Header="Architecture" DisplayMemberBinding="{Binding Architecture}"/>
+                    <GridViewColumn Header="Created Time" DisplayMemberBinding="{Binding CreatedTime}"/>
+                    <GridViewColumn Header="Last Update Time" DisplayMemberBinding="{Binding LastUpdateTime}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>
