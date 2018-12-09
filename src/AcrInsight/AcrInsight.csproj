@@ -5,6 +5,16 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
     <LangVersion>latest</LangVersion>
+    <Authors>xin9le</Authors>
+    <Company></Company>
+    <Description>Manifest viewer of Azure Container Registry repository.</Description>
+    <RepositoryType>Git</RepositoryType>
+    <RepositoryUrl>https://github.com/xin9le/AcrInsight</RepositoryUrl>
+    <PackageTags>azure-container-registry, docker, viewer</PackageTags>
+    <PackageProjectUrl>https://github.com/xin9le/AcrInsight</PackageProjectUrl>
+    <PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <Copyright>Copyright© xin9le, All rights reserved.</Copyright>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
