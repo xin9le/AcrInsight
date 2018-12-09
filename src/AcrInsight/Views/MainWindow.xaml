@@ -45,8 +45,9 @@
         </Grid>
         
         <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center" Background="Transparent" />
-        
-        <ListView Grid.Column="2" Margin="0,5,5,5" ItemsSource="{Binding Manifests}" AlternationCount="2" VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling">
+
+        <ListView Grid.Column="2" Margin="0,5,5,5" ItemsSource="{Binding Manifests}" SelectedItem="{Binding SelectedManifest.Value}"
+                  AlternationCount="2" VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Style.Triggers>
@@ -90,6 +91,11 @@
                     <GridViewColumn Header="Last Update Time" DisplayMemberBinding="{Binding LastUpdateTime, StringFormat={}{0:yyyy/MM/dd HH:mm:ss zzz}}"/>
                 </GridView>
             </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Copy digest to clipboard" Command="{Binding CopyDigestCommand}" />
+                </ContextMenu>
+            </ListView.ContextMenu>
         </ListView>
     </Grid>
 </Window>

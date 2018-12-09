@@ -48,6 +48,12 @@ namespace AcrInsight.ViewModels
 
 
         /// <summary>
+        /// Gets selected manifest.
+        /// </summary>
+        public ReactiveProperty<AcrManifest> SelectedManifest { get; } = new ReactiveProperty<AcrManifest>(mode: ReactivePropertyMode.DistinctUntilChanged);
+
+
+        /// <summary>
         /// Gets container repository names.
         /// </summary>
         public ObservableCollection<AcrManifest> Manifests { get; } = new ObservableCollection<AcrManifest>();
@@ -59,6 +65,12 @@ namespace AcrInsight.ViewModels
         /// Gets load command.
         /// </summary>
         public AsyncReactiveCommand LoadCommand { get; }
+
+
+        /// <summary>
+        /// Gets copy digest to clipboard command.
+        /// </summary>
+        public ReactiveCommand CopyDigestCommand { get; }
         #endregion
 
 
@@ -77,6 +89,7 @@ namespace AcrInsight.ViewModels
                     (userName, password, loginServer) => !string.IsNullOrWhiteSpace(userName) && !string.IsNullOrWhiteSpace(password) && !string.IsNullOrWhiteSpace(loginServer)
                 )
                 .ToAsyncReactiveCommand();
+            this.CopyDigestCommand = this.SelectedManifest.Select(x => x != null).ToReactiveCommand(false);
 
             //--- operations
             IReadOnlyDictionary<string, AcrManifest[]> repos = null;
@@ -101,6 +114,10 @@ namespace AcrInsight.ViewModels
                 foreach (var x in loaded)
                     this.RepositoryNames.Add(x.Name);
             });
+
+            this.CopyDigestCommand
+                .Select(_ => this.SelectedManifest.Value.Digest)
+                .Subscribe(Clipboard.SetText);
 
             this.SelectedRepositoryName
                 .Do(_ => this.Manifests.Clear())
